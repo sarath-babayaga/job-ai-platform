@@ -9,6 +9,8 @@ from backend.app.models.job import Job
 from backend.app.routes.users import router as user_router
 from backend.app.routes.resumes import router as resume_router
 from backend.app.routes.jobs import router as job_router
+from backend.app.routes.match import router as match_router
+from backend.app.routes.recommend import router as recommend_router
 
 User.metadata.create_all(bind=engine)
 Resume.metadata.create_all(bind=engine)
@@ -33,3 +35,5 @@ def health():
 app.include_router(user_router)
 app.include_router(resume_router)
 app.include_router(job_router)
+app.include_router(match_router)
+app.include_router(recommend_router)
