@@ -1,0 +1,109 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Inter, Arial, sans-serif;
+  background: #0f172a;
+  color: white;
+}
+
+.app {
+  min-height: 100vh;
+}
+
+.hero {
+  text-align: center;
+  padding: 80px 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #2563eb,
+      #7c3aed
+    );
+}
+
+.hero h1 {
+  font-size: 4rem;
+  margin-bottom: 15px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+.dashboard {
+  max-width: 1300px;
+  margin: -40px auto 0;
+
+  padding: 20px;
+
+  display: grid;
+
+  gap: 20px;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.card {
+  background: white;
+  color: black;
+
+  padding: 25px;
+
+  border-radius: 20px;
+
+  box-shadow:
+    0 15px 30px rgba(0,0,0,0.2);
+}
+
+.card h2 {
+  margin-bottom: 20px;
+}
+
+button {
+  margin-top: 20px;
+
+  background: #2563eb;
+  color: white;
+
+  border: none;
+
+  padding: 12px 24px;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+}
+
+.score {
+  font-size: 72px;
+  font-weight: bold;
+  color: #16a34a;
+}
+
+.job {
+  display: flex;
+  justify-content: space-between;
+
+  padding: 12px 0;
+
+  border-bottom: 1px solid #ddd;
+}
+
+@media (max-width: 768px) {
+
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+
+}

@@ -1,17 +1,17 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from backend.app.database import get_db
+from app.database import get_db
 
-from backend.app.models.resume import Resume
-from backend.app.models.job import Job
+from app.models.resume import Resume
+from app.models.job import Job
 
-from backend.app.services.resume_parser import (
+from app.services.resume_parser import (
     parse_docx,
     parse_pdf
 )
 
-from backend.app.services.matcher import (
+from app.services.matcher import (
     calculate_match_score
 )
 

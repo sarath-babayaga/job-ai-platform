@@ -1,4 +1,4 @@
-from backend.app.services.skills import HR_SKILLS
+from app.services.skills import HR_SKILLS
 
 
 def extract_skills(text: str):
