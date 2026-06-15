@@ -1,24 +1,30 @@
 # Python
 __pycache__/
 *.pyc
-*.pyo
-*.pyd
 
 # Environment
 .env
-venv/
-.venv/
 
 # Node
 node_modules/
-
-# Build
 dist/
-build/
 
-# VS Code
+# Vite
+.vite/
+
+# IDE
 .vscode/
+.idea/
 
-# OS files
+# OS
 .DS_Store
 Thumbs.db
+
+
+
+venv/
+
+
+*.zip
+
+backend/resumes/*

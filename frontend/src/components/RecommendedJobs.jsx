@@ -3,6 +3,7 @@ import api from "../api";
 
 function RecommendedJobs({ resumeId }) {
   const [jobs, setJobs] = useState([]);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     if (resumeId) {
@@ -22,25 +23,72 @@ function RecommendedJobs({ resumeId }) {
     }
   };
 
+  const applyJob = async (jobId) => {
+    try {
+      await api.post("/applications/", {
+        resume_id: resumeId,
+        job_id: jobId,
+      });
+
+      setMessage("✅ Application submitted successfully");
+    } catch (error) {
+      console.error(error);
+      setMessage("❌ Failed to apply");
+    }
+  };
+
   return (
     <div className="card">
       <h2>💼 Recommended Jobs</h2>
+
+      {message && (
+        <p
+          style={{
+            color: "green",
+            fontWeight: "bold",
+          }}
+        >
+          {message}
+        </p>
+      )}
 
       {jobs.length === 0 ? (
         <p>No jobs found</p>
       ) : (
         jobs.map((job) => (
           <div
-            className="job"
             key={job.job_id}
+            style={{
+              borderBottom: "1px solid #ddd",
+              padding: "10px 0",
+              marginBottom: "8px",
+            }}
           >
-            <span>
-              {job.title}
-            </span>
+            <div>
+              <strong>{job.title}</strong>
+            </div>
 
-            <span>
-              {job.match_score}%
-            </span>
+            <div>{job.company}</div>
+
+            <div>{job.location}</div>
+
+            <div>
+              Match Score:{" "}
+              <strong>
+                {job.match_score}%
+              </strong>
+            </div>
+
+            <button
+              onClick={() =>
+                applyJob(job.job_id)
+              }
+              style={{
+                marginTop: "8px",
+              }}
+            >
+              Apply
+            </button>
           </div>
         ))
       )}

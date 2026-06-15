@@ -6,9 +6,10 @@ import ResumeUpload from "./components/ResumeUpload";
 import RecommendedJobs from "./components/RecommendedJobs";
 import ATSScore from "./components/ATSScore";
 import CandidateProfile from "./components/CandidateProfile";
+import ApplicationTracker from "./components/ApplicationTracker";
 
 function App() {
-  const [resumeId, setResumeId] = useState(1);
+  const [resumeId, setResumeId] = useState(null);
 
   return (
     <div className="app">
@@ -33,13 +34,17 @@ function App() {
         <CandidateProfile
           resumeId={resumeId}
         />
-        
+
         <ATSScore
           resumeId={resumeId}
         />
 
         <RecommendedJobs
           resumeId={resumeId}
+        />
+        
+        <ApplicationTracker
+          // resumeId={resumeId}
         />
       </div>
     </div>

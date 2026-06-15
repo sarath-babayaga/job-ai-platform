@@ -12,10 +12,16 @@ function CandidateProfile({ resumeId }) {
 
   const loadProfile = async () => {
     try {
-      const response = await api.get(`/resumes/${resumeId}`);
-      setProfile(response.data);
+      const response = await api.get(
+        `/resumes/${resumeId}/analyze`
+      );
+
+      setProfile(response.data.analysis);
     } catch (error) {
-      console.error("Error loading profile:", error);
+      console.error(
+        "Error loading profile:",
+        error
+      );
     }
   };
 
@@ -37,31 +43,37 @@ function CandidateProfile({ resumeId }) {
     );
   }
 
-  const displayedSkills = profile.skills?.slice(0, 12) || [];
+  const displayedSkills =
+    profile.skills?.slice(0, 12) || [];
+
   const remainingSkills =
-    profile.skills?.length > 12 ? profile.skills.length - 12 : 0;
+    profile.skills?.length > 12
+      ? profile.skills.length - 12
+      : 0;
 
   return (
     <div className="card">
       <h2>👤 Candidate Profile</h2>
 
-      <div style={{ marginBottom: "15px" }}>
-        <p>
-          <strong>Name:</strong> {profile.name}
-        </p>
+      <p>
+        <strong>Name:</strong>{" "}
+        {profile.name || "N/A"}
+      </p>
 
-        <p>
-          <strong>Email:</strong> {profile.email}
-        </p>
+      <p>
+        <strong>Email:</strong>{" "}
+        {profile.email || "N/A"}
+      </p>
 
-        <p>
-          <strong>Phone:</strong> {profile.phone}
-        </p>
+      <p>
+        <strong>Phone:</strong>{" "}
+        {profile.phone || "N/A"}
+      </p>
 
-        <p>
-          <strong>Experience:</strong> {profile.experience}
-        </p>
-      </div>
+      <p>
+        <strong>Experience:</strong>{" "}
+        {profile.experience || "N/A"}
+      </p>
 
       <h3>Skills</h3>
 
@@ -70,32 +82,32 @@ function CandidateProfile({ resumeId }) {
           display: "flex",
           flexWrap: "wrap",
           gap: "8px",
-          justifyContent: "center",
+          marginTop: "10px",
         }}
       >
-        {displayedSkills.map((skill, index) => (
-          <span
-            key={index}
-            style={{
-              background: "#dbeafe",
-              color: "#2563eb",
-              padding: "6px 10px",
-              borderRadius: "15px",
-              fontSize: "12px",
-            }}
-          >
-            {skill}
-          </span>
-        ))}
+        {displayedSkills.map(
+          (skill, index) => (
+            <span
+              key={index}
+              style={{
+                background: "#dbeafe",
+                color: "#1d4ed8",
+                padding: "6px 10px",
+                borderRadius: "12px",
+                fontSize: "12px",
+              }}
+            >
+              {skill}
+            </span>
+          )
+        )}
       </div>
 
       {remainingSkills > 0 && (
         <p
           style={{
-            marginTop: "12px",
+            marginTop: "10px",
             color: "#666",
-            fontSize: "14px",
-            textAlign: "center",
           }}
         >
           +{remainingSkills} more skills
