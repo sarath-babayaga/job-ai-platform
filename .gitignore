@@ -20,7 +20,7 @@ dist/
 .DS_Store
 Thumbs.db
 
-
+backend/jobai.db
 
 venv/
 
