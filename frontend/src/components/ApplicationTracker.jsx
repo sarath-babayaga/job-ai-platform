@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
 import api from "../api";
 
-function ApplicationTracker() {
-  const [applications, setApplications] = useState([]);
+function ApplicationTracker({
+  refreshTrigger,
+}) {
+  const [applications, setApplications] =
+    useState([]);
 
   useEffect(() => {
     loadApplications();
-  }, []);
+  }, [refreshTrigger]);
 
   const loadApplications = async () => {
     try {

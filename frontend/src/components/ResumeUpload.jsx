@@ -7,7 +7,7 @@ function ResumeUpload({ setResumeId }) {
 
   const uploadResume = async () => {
     if (!file) {
-      alert("Select a resume first");
+      setMessage("Please select a file");
       return;
     }
 
@@ -25,18 +25,25 @@ function ResumeUpload({ setResumeId }) {
         }
       );
 
-      const uploadedResumeId =
-        response.data.id ||
-        response.data.resume_id;
+      const resumeId = response.data.id;
 
-      setResumeId(uploadedResumeId);
+      setResumeId(resumeId);
+
+      // Save for refresh persistence
+      localStorage.setItem(
+        "resumeId",
+        resumeId
+      );
 
       setMessage(
-        `Uploaded successfully. Resume ID: ${uploadedResumeId}`
+        `Uploaded successfully. Resume ID: ${resumeId}`
       );
     } catch (error) {
       console.error(error);
-      setMessage("Upload failed");
+
+      setMessage(
+        "Failed to upload resume"
+      );
     }
   };
 
@@ -46,6 +53,7 @@ function ResumeUpload({ setResumeId }) {
 
       <input
         type="file"
+        accept=".pdf,.docx"
         onChange={(e) =>
           setFile(e.target.files[0])
         }
@@ -58,7 +66,13 @@ function ResumeUpload({ setResumeId }) {
         Upload Resume
       </button>
 
-      <p>{message}</p>
+      <p
+        style={{
+          marginTop: "15px",
+        }}
+      >
+        {message}
+      </p>
     </div>
   );
 }

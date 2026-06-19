@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import { motion } from "framer-motion";
 
@@ -9,7 +9,23 @@ import CandidateProfile from "./components/CandidateProfile";
 import ApplicationTracker from "./components/ApplicationTracker";
 
 function App() {
-  const [resumeId, setResumeId] = useState(null);
+  const [resumeId, setResumeId] = useState(
+    localStorage.getItem("resumeId")
+      ? Number(localStorage.getItem("resumeId"))
+      : null
+  );
+
+  const [applicationRefresh, setApplicationRefresh] =
+    useState(0);
+
+  useEffect(() => {
+    if (resumeId) {
+      localStorage.setItem(
+        "resumeId",
+        resumeId
+      );
+    }
+  }, [resumeId]);
 
   return (
     <div className="app">
@@ -41,10 +57,17 @@ function App() {
 
         <RecommendedJobs
           resumeId={resumeId}
+          onApplicationCreated={() =>
+            setApplicationRefresh(
+              (prev) => prev + 1
+            )
+          }
         />
-        
+
         <ApplicationTracker
-          // resumeId={resumeId}
+          refreshTrigger={
+            applicationRefresh
+          }
         />
       </div>
     </div>
